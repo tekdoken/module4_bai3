@@ -14,7 +14,7 @@ import thuchanh1.service.ICustomerService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/customer")
+@RequestMapping("/test")
 public class CustomerController {
     private final ICustomerService customerService = new CustomerService();
 
@@ -23,7 +23,7 @@ public class CustomerController {
 
         List<Customer> customerList = customerService.findAll();
         model.addAttribute("customers", customerList);
-        return "/index";
+        return "/demo";
     }
     @GetMapping("/create")
     public String create(Model model) {
@@ -34,7 +34,7 @@ public class CustomerController {
     public String save(Customer customer) {
         customer.setId((int) (Math.random() * 10000));
         customerService.save(customer);
-        return "redirect:/customer";
+        return "redirect:/test";
     }
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable int id, Model model) {
@@ -44,7 +44,7 @@ public class CustomerController {
     @PostMapping("/update")
     public String update(Customer customer) {
         customerService.update(customer.getId(), customer);
-        return "redirect:/customer";
+        return "redirect:/test";
     }
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable int id, Model model) {
@@ -55,7 +55,7 @@ public class CustomerController {
     public String delete(Customer customer, RedirectAttributes redirect) {
         customerService.remove(customer.getId());
         redirect.addFlashAttribute("success", "Removed customer successfully!");
-        return "redirect:/customer";
+        return "redirect:/test";
     }@GetMapping("/{id}/view")
     public String view(@PathVariable int id, Model model) {
         model.addAttribute("customer", customerService.findById(id));
