@@ -59,4 +59,13 @@ public class ProductService implements IProductService {
         }
         return -1;
     }
+    public List<Product> findByName(String name){
+        List<Product> productList=new ArrayList<>();
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getName().contains(name)){
+                productList.add(products.get(i));
+            }
+        }
+        return productList;
+    }
 }

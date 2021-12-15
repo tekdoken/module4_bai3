@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="/layout :: head">
+<body>
+<form action="">
+    <input type="text" name="search" placeholder="enter name "><button>find</button>
+</form>
+<h1>    <a th:href="@{/}">
+    Back to product list
+</a></h1>
+<h1><a th:href="@{/create}">
+    Add new product
+</a>
+</h1>
+<table id="pro">
+    <tr>
+        <td>id</td>
+        <td>name</td>
+        <td>price</td>
+        <td>des</td>
+        <td>manu</td>
+    </tr>
+        <tr th:each="pro: ${products}">
+            <td th:text="${pro.id}"></td>
+            <td th:text="${pro.name}"></td>
+            <td th:text="${pro.price}"></td>
+            <td th:text="${pro.description}"></td>
+            <td th:text="${pro.manufacturer}"></td>
+            <td><a th:href="@{/__${pro.id}__/edit}">edit</a></td>
+            <td><a th:href="@{/__${pro.id}__/view}">view</a></td>
+            <td><a th:href="@{/__${pro.id}__/delete}"
+                   onclick="if (confirm('Delete selected item?')){return true;}else{event.stopPropagation(); event.preventDefault();};" title="Link Title">
+                delete</a></td>
+        </tr>
+</table>
+</body>
+</html>
